@@ -95,7 +95,7 @@ func resourceInstanceCreate(ctx context.Context, d *schema.ResourceData, meta in
 	if resp.StatusCode != http.StatusOK {
 		errorResponse, err := decodeErrorResponse(resp)
 		if err != nil {
-			return diag.Errorf("Failed to decode API error reponse: %s", err)
+			return diag.Errorf("Failed to decode API error response: %s", err)
 		}
 		return diag.Errorf("Failed to launch instance with error: %s", errorResponse.Message)
 	}
@@ -103,7 +103,7 @@ func resourceInstanceCreate(ctx context.Context, d *schema.ResourceData, meta in
 	var launchInstanceResponse v1.LaunchAPIResponse
 	err = json.NewDecoder(resp.Body).Decode(&launchInstanceResponse)
 	if err != nil {
-		return diag.Errorf("Failed to decode API reponse: %s", err)
+		return diag.Errorf("Failed to decode API response: %s", err)
 	}
 
 	// again, we only support creating a single instance per resource
@@ -131,7 +131,7 @@ func resourceInstanceRead(ctx context.Context, d *schema.ResourceData, meta inte
 
 		errorResponse, err := decodeErrorResponse(resp)
 		if err != nil {
-			return diag.Errorf("Failed to decode API error reponse: %s", err)
+			return diag.Errorf("Failed to decode API error response: %s", err)
 		}
 		return diag.Errorf("Failed to fetch instance data: %s", errorResponse.Message)
 	}
@@ -185,7 +185,7 @@ func resourceInstanceDelete(ctx context.Context, d *schema.ResourceData, meta in
 
 		errorResponse, err := decodeErrorResponse(resp)
 		if err != nil {
-			return diag.Errorf("Failed to decode API error reponse: %s", err)
+			return diag.Errorf("Failed to decode API error response: %s", err)
 		}
 		return diag.Errorf("Failed to delete instance %s: %s", id, errorResponse.Message)
 	}
