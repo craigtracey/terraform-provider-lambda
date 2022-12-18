@@ -10,13 +10,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 )
 
+const lambdaProdEndpoint = "https://cloud.lambdalabs.com/api/v1/"
+
 func Provider() *schema.Provider {
 	p := &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"endpoint": {
 				Type:         schema.TypeString,
 				Required:     true,
-				DefaultFunc:  schema.EnvDefaultFunc("LAMBDA_API_ENDPOINT", nil),
+				DefaultFunc:  schema.EnvDefaultFunc("LAMBDA_API_ENDPOINT", lambdaProdEndpoint),
 				Description:  "URL of Lambda GPU Cloud API endpoint.",
 				ValidateFunc: validation.IsURLWithHTTPorHTTPS,
 			},
