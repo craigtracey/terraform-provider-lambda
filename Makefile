@@ -1,6 +1,7 @@
 VERSION = 1.2.0
 PROVIDER_NAME = terraform-provider-lambda_v${VERSION}
 API_SPEC = https://cloud.lambdalabs.com/static/api/v1/openapi.yaml
+PLUGIN_NAMESPACE = craigtracey.com/craigtracey/lambda
 
 .PHONY: all
 all: provider
@@ -23,3 +24,11 @@ provider: test gen
 .PHONY: test
 test: gen
 	go test -v ./pkg/provider/
+
+.PHONY: install-dev
+install-dev: provider
+	ifneq ($(uname),Linux)
+	$(error install-dev only tested on linux amd64)
+	endif
+	mkdir -p ~/.terraform.d/plugins/${PLUGIN_NAMESPACE}/${VERSION}
+	cp ${PROVIDER_NAME} ~/.terraform.d/plugins/${PLUGIN_NAMESPACE}/${VERSION}/linux_amd64
