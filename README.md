@@ -2,6 +2,8 @@ Lambda GPU Cloud Terraform Provider
 ===
 A Terraform provider for managing Lambda GPU Cloud resources.
 
+![build status](https://github.com/craigtracey/terraform-provider-lambda/actions/workflows/test.yml/badge.svg)
+
 Requirements
 ---
 - [Terraform](https://www.terraform.io/downloads.html)
